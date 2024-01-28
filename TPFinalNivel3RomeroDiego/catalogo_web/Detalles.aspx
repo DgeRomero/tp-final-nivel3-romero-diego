@@ -31,11 +31,14 @@
             </div>
         </div>
         <div class="col-md-4">
+            <label class="form-label">Imagen Producto</label>
             <div class="mb-3">
-                <label class="form-label">Imagen Producto</label>
                 <asp:Image ID="imgProducto" ImageUrl="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png"
                     runat="server" CssClass="img-fluid mb-3" />
             </div>
+        </div>
+        <div class="mb-2">
+            <a href="Default.aspx" class="btn btn-primary">Volver</a>
         </div>
     </div>
 </asp:Content>

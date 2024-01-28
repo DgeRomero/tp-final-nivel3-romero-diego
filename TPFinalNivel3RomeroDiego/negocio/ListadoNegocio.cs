@@ -128,7 +128,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "select Codigo, Nombre, M.Descripcion Marca, c.Descripcion Categoria,  Precio, A.Descripcion, ImagenUrl, a.IdCategoria, a.IdMarca, a.Id  from ARTICULOS A, CATEGORIAS C, MARCAS M where C.Id = A.IdCategoria and M.Id = A.IdMarca and ";
+                string consulta = "Select Codigo, Nombre, M.Descripcion Marca, C.Descripcion Categoria,  Precio, A.Descripcion, ImagenUrl, A.IdCategoria, A.IdMarca, A.Id  from ARTICULOS A, CATEGORIAS C, MARCAS M where C.Id = A.IdCategoria and M.Id = A.IdMarca and ";
                 if(campo == "Precio")
                 {
                     switch (criterio)
@@ -193,10 +193,10 @@ namespace negocio
                 {
                     switch (criterio)
                     {
-                        case "Comienza con":
+                        case "comienza con":
                             consulta += "Codigo like '" + filtro + "%'";
                             break;
-                        case "Termina con":
+                        case "termina con":
                             consulta += "Codigo like '%" + filtro + "'";
                             break;
                         default:
