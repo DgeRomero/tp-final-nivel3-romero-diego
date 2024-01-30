@@ -28,17 +28,12 @@
         <ContentTemplate>
             <%if (cbxFiltroAvanzado.Checked)
                 { %>
+            
             <div class="row">
                 <div class="col-3">
                     <div class="mb-3">
                         <asp:Label Text="Filtrar por:" runat="server" />
-                        <asp:DropDownList runat="server" ID="ddlCampo" CssClass="form-control" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged" AutoPostBack="true">
-                            <asp:ListItem Text="" />
-                            <asp:ListItem Text="Nombre" />
-                            <asp:ListItem Text="Precio" />
-                            <asp:ListItem Text="Marca" />
-                            <asp:ListItem Text="Categoría" />
-                            <asp:ListItem Text="Código" />
+                        <asp:DropDownList runat="server" ID="ddlCampo" CssClass="form-control" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged" AutoPostBack="true" >
                         </asp:DropDownList>
                     </div>
                 </div>
@@ -54,11 +49,13 @@
                         <asp:TextBox ID="txtFiltroAvanzado" CssClass="form-control" runat="server" />
                     </div>
                 </div>
+                
             </div>
             <div class="row">
                 <div class="col-6">
                     <div class="mb-3">
                         <asp:Button Text="Buscar" CssClass="btn btn-primary" ID="btnBuscar" runat="server" OnClick="btnBuscar_Click" />
+                        <asp:Button Text="Limpiar  filtro" ID="btnLimpiarFiltro" runat="server" OnClick="btnLimpiarFiltro_Click" CssClass="btn btn-outline-secondary"  />
                     </div>
                 </div>
             </div>
@@ -76,7 +73,7 @@
                         <img src="<%#Eval("UrlImagen") %>" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"><%#Eval("Nombre") %></h5>
-                            <p class="card-text"><%#Eval("Descripcion") %></p>
+                            <p class="card-text">$<%#Eval("Precio") %></p>
                             <a href="Detalles.aspx?id=<%#Eval("Id") %>">Ver detalle</a>
                             <asp:Button Text="Agregar Favorito" CssClass="btn btn-primary" runat="server" ID="btnEjemplo" CommandArgument='<%#Eval("Id") %>' CommandName="PokemonId" />
                         </div>

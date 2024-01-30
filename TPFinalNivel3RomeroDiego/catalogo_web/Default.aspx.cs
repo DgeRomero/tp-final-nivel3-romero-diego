@@ -39,6 +39,7 @@ namespace catalogo_web
         {
             filtroAvanzado = cbxFiltroAvanzado.Checked;
             txtFiltro.Enabled = !filtroAvanzado;
+            cargarDdlCampo();
             //ddlCampo.Items.Add("");
             //ddlCampo.Items.Add("Nombre");
             //ddlCampo.Items.Add("Precio");
@@ -50,6 +51,7 @@ namespace catalogo_web
         protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlCriterio.Items.Clear();
+            ddlCampo.Items.Remove("");
             if(ddlCampo.SelectedItem.ToString() == "Precio")
             {
                 ddlCriterio.Items.Add("Igual a");
@@ -80,6 +82,43 @@ namespace catalogo_web
 
                 Session.Add("error", ex.ToString());
             }
+        }
+
+        protected void btnLimpiarFiltro_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ListadoNegocio negocio = new ListadoNegocio();
+                ddlCampo.Items.Clear();
+                ddlCriterio.Items.Clear();
+                txtFiltroAvanzado.Text = "";
+                cargarDdlCampo();
+                //ddlCampo.Items.Add("");
+                //ddlCampo.Items.Add("Nombre");
+                //ddlCampo.Items.Add("Precio");
+                //ddlCampo.Items.Add("Marca");
+                //ddlCampo.Items.Add("Categoría");
+                //ddlCampo.Items.Add("Código");
+                repRepetidor.DataSource = negocio.listar();
+                repRepetidor.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
+                throw;
+            }
+            
+        }
+        private void cargarDdlCampo()
+        {
+            ddlCampo.Items.Add("");
+            ddlCampo.Items.Add("Nombre");
+            ddlCampo.Items.Add("Precio");
+            ddlCampo.Items.Add("Marca");
+            ddlCampo.Items.Add("Categoría");
+            ddlCampo.Items.Add("Código");
         }
     }
 }
