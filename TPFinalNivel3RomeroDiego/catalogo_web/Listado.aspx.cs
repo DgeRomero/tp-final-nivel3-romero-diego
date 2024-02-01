@@ -14,6 +14,12 @@ namespace catalogo_web
         public bool filtroAvanzadoListado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Seguridad.esAdmin(Session["usuario"]))
+            {
+                Session.Add("error", "Necesitas ser Admin para ver esto...");
+                Response.Redirect("Error.aspx", false);
+            }
+
             filtroAvanzadoListado = cbxFiltroAvanzadoListado.Checked;
             if (!IsPostBack)
             {
