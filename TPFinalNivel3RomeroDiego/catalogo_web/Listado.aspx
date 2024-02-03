@@ -30,12 +30,6 @@
                     <div class="mb-3">
                         <asp:Label Text="Filtrar por:" runat="server" />
                         <asp:DropDownList runat="server" ID="ddlCampoListado" CssClass="form-control" OnSelectedIndexChanged="ddlCampoListado_SelectedIndexChanged" AutoPostBack="true">
-                            <asp:ListItem Text="" />
-                            <asp:ListItem Text="Nombre" />
-                            <asp:ListItem Text="Precio" />
-                            <asp:ListItem Text="Marca" />
-                            <asp:ListItem Text="Categoría" />
-                            <asp:ListItem Text="Código" />
                         </asp:DropDownList>
                     </div>
                 </div>
@@ -56,6 +50,7 @@
                 <div class="col-6">
                     <div class="mb-3">
                         <asp:Button Text="Buscar" CssClass="btn btn-primary" ID="btnBuscarFiltro" runat="server" OnClick="btnBuscarFiltro_Click" />
+                        <asp:Button Text="Limpiar  filtro" ID="btnLimpiarFiltro" runat="server" OnClick="btnLimpiarFiltro_Click" CssClass="btn btn-outline-secondary"  />
                     </div>
                 </div>
             </div>

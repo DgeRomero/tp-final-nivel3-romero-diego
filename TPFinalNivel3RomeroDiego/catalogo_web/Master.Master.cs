@@ -15,31 +15,39 @@ namespace catalogo_web
         {
             imgAvatar.ImageUrl = "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png";
 
-            if(!(Page is Login || Page is Default || Page is Registro || Page is Error))
+            if (!(Page is Login || Page is Default || Page is Registro || Page is Error))
             {
                 if (!Seguridad.sessionActiva(Session["usuario"]))
                 {
                     Response.Redirect("Login.aspx", false);
                 }
-                else
+                else if (!IsPostBack)
                 {
                     Usuario user = (Usuario)Session["usuario"];
-                    lblUser.Text = user.Email;
+
+                    string nombre = user.Nombre;
+                    lblUser.Text += nombre != null ? nombre : user.Email;
+
                     if (!string.IsNullOrEmpty(user.ImagenPerfil))
                     {
-                        imgAvatar.ImageUrl = "~/images/" + user.ImagenPerfil;
+                        imgAvatar.ImageUrl = "~/images/" + user.ImagenPerfil + "?v=" + DateTime.Now.Ticks.ToString();
                     }
                 }
             }
+            else if (Session["usuario"] != null && !IsPostBack)
+            {
+                Usuario user = (Usuario)Session["usuario"];
 
-            if (Seguridad.sessionActiva(Session["usuario"]))
-            {
-                imgAvatar.ImageUrl = "~/images/" + ((Usuario)Session["usuario"]).ImagenPerfil;
+                string nombre = user.Nombre;
+                lblUser.Text += nombre != null ? nombre : user.Email;
+
+
+                if (!string.IsNullOrEmpty(user.ImagenPerfil))
+                {
+                    imgAvatar.ImageUrl = "~/images/" + user.ImagenPerfil + "?v=" + DateTime.Now.Ticks.ToString();
+                }
             }
-            else
-            {
-                
-            }
+
         }
 
         protected void btnCerrarSesion_Click(object sender, EventArgs e)

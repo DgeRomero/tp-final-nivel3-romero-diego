@@ -43,11 +43,13 @@ namespace catalogo_web
         {
             filtroAvanzadoListado = cbxFiltroAvanzadoListado.Checked;
             txtFiltroListado.Enabled = !filtroAvanzadoListado;
+            cargarDdlCampo();
         }
 
         protected void ddlCampoListado_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlCriterioListado.Items.Clear();
+            ddlCampoListado.Items.Remove("");
             if(ddlCampoListado.SelectedIndex.ToString() == "Precio")
             {
                 ddlCriterioListado.Items.Add("Igual a");
@@ -64,11 +66,20 @@ namespace catalogo_web
 
         protected void btnBuscarFiltro_Click(object sender, EventArgs e)
         {
-            ListadoNegocio negocio = new ListadoNegocio();
-            dvgListaArticulos.DataSource = negocio.filtrar(ddlCampoListado.SelectedItem.ToString(), 
-                ddlCriterioListado.SelectedItem.ToString(),
-                txtFiltroAvanzadoListado.Text);
-            dvgListaArticulos.DataBind();
+            try
+            {
+                ListadoNegocio negocio = new ListadoNegocio();
+                dvgListaArticulos.DataSource = negocio.filtrar(ddlCampoListado.SelectedItem.ToString(),
+                    ddlCriterioListado.SelectedItem.ToString(),
+                    txtFiltroAvanzadoListado.Text);
+                dvgListaArticulos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw;
+            }
+            
         }
 
         protected void dvgListaArticulos_SelectedIndexChanged(object sender, EventArgs e)
@@ -82,6 +93,34 @@ namespace catalogo_web
             dvgListaArticulos.DataSource = Session["articulos"];
             dvgListaArticulos.PageIndex = e.NewPageIndex;
             dvgListaArticulos.DataBind();
+        }
+
+        protected void btnLimpiarFiltro_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ListadoNegocio negocio = new ListadoNegocio();
+                ddlCampoListado.Items.Clear();
+                ddlCriterioListado.Items.Clear();
+                txtFiltroAvanzadoListado.Text = "";
+                cargarDdlCampo();
+                dvgListaArticulos.DataSource = negocio.listar();
+                dvgListaArticulos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Errro.aspx", false);
+            }
+        }
+        private void cargarDdlCampo()
+        {
+            ddlCampoListado.Items.Add("");
+            ddlCampoListado.Items.Add("Nombre");
+            ddlCampoListado.Items.Add("Precio");
+            ddlCampoListado.Items.Add("Marca");
+            ddlCampoListado.Items.Add("Categoría");
+            ddlCampoListado.Items.Add("Código");
         }
     }
 }

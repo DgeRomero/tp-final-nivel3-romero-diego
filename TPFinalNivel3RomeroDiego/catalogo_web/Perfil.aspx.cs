@@ -26,8 +26,9 @@ namespace catalogo_web
                         txtMail.ReadOnly = true;
                         if (!string.IsNullOrEmpty(user.ImagenPerfil))
                         {
-                            imgPerfil.ImageUrl = "~/images/" + user.ImagenPerfil;
+                            imgPerfil.ImageUrl = "~/images/" + user.ImagenPerfil + "?v=" + DateTime.Now.Ticks.ToString();
                         }
+                       
                     }
                 }
                 
@@ -52,15 +53,20 @@ namespace catalogo_web
                 {
                     string ruta = Server.MapPath("./images/");
                     txtImagen.PostedFile.SaveAs(ruta + "perfil-" + user.Id + ".jpg");
-                    user.ImagenPerfil = "perfil" + user.Id + ".jpg";
+                    user.ImagenPerfil = "perfil-" + user.Id + ".jpg";
                 }
+
                 user.Nombre = txtNombre.Text;
                 user.Apellido = txtApellido.Text;
 
                 negocio.actualizar(user);
 
                 Image img = (Image)Master.FindControl("imgAvatar");
-                img.ImageUrl = "~/images/" + user.ImagenPerfil;
+                img.ImageUrl = "~/images/" + user.ImagenPerfil + "?v=" + DateTime.Now.Ticks.ToString();
+                Label lbl = (Label)Master.FindControl("lblUser");
+                string nombre = user.Nombre;
+                lbl.Text = "Hola, ";
+                lbl.Text += nombre != null ? nombre : user.Email;
             }
             catch (Exception ex)
             {

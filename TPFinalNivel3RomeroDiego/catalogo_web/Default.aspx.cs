@@ -15,7 +15,12 @@ namespace catalogo_web
         public List<Articulo> ListaArticulos { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if((Usuario)Session["usuario"] != null)
+            {
+                Usuario activo = (Usuario)Session["usuario"];
+            }
+            
+            
             filtroAvanzado = cbxFiltroAvanzado.Checked;
             if (!IsPostBack)
             {
@@ -40,12 +45,6 @@ namespace catalogo_web
             filtroAvanzado = cbxFiltroAvanzado.Checked;
             txtFiltro.Enabled = !filtroAvanzado;
             cargarDdlCampo();
-            //ddlCampo.Items.Add("");
-            //ddlCampo.Items.Add("Nombre");
-            //ddlCampo.Items.Add("Precio");
-            //ddlCampo.Items.Add("Marca");
-            //ddlCampo.Items.Add("Categoría");
-            //ddlCampo.Items.Add("Código");
         }
 
         protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
@@ -93,12 +92,6 @@ namespace catalogo_web
                 ddlCriterio.Items.Clear();
                 txtFiltroAvanzado.Text = "";
                 cargarDdlCampo();
-                //ddlCampo.Items.Add("");
-                //ddlCampo.Items.Add("Nombre");
-                //ddlCampo.Items.Add("Precio");
-                //ddlCampo.Items.Add("Marca");
-                //ddlCampo.Items.Add("Categoría");
-                //ddlCampo.Items.Add("Código");
                 repRepetidor.DataSource = negocio.listar();
                 repRepetidor.DataBind();
 
