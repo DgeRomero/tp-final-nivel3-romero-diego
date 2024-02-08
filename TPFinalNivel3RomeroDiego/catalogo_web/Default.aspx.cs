@@ -113,5 +113,32 @@ namespace catalogo_web
             ddlCampo.Items.Add("Categoría");
             ddlCampo.Items.Add("Código");
         }
+
+        protected void btnFavorito_Click(object sender, EventArgs e)
+        {
+            string idFavorito = ((Button)sender).CommandArgument;
+            ListadoNegocio listNegocio = new ListadoNegocio();
+            FavoritoNegocio negocio = new FavoritoNegocio();
+            Usuario user = (Usuario)Session["usuario"];
+            Articulo favorito = listNegocio.listar(idFavorito)[0];
+            try
+            {
+                if (Seguridad.sessionActiva(Session["usuario"]))
+                {
+                    negocio.agregarFavorito(favorito, user);
+                    Response.Redirect("Favoritos.aspx", false);
+                }
+                else
+                {
+                    Session.Add("error", "Debe inciar sesion para poder agregar favorito");
+                    Response.Redirect("Error.aspx", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
+        }
     }
 }
