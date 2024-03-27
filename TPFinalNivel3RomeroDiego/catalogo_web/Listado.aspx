@@ -69,7 +69,7 @@
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                     <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />
                     <asp:BoundField HeaderText="Categoria" DataField="Categoria.Descripcion" />                    
-                    <asp:BoundField HeaderText="Precio" DataField="Precio" />                    
+                    <asp:BoundField HeaderText="Precio" DataField="Precio" DataFormatString="{0:F2}" />                    
                     <asp:BoundField HeaderText="Código" DataField="Codigo" />                    
                     <asp:CommandField HeaderText="Acción" ShowSelectButton="true" ItemStyle-CssClass="text-center" SelectText="🔥" />
                 </Columns>

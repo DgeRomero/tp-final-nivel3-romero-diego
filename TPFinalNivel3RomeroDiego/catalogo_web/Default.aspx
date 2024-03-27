@@ -73,9 +73,12 @@
                         <img src="<%#Eval("UrlImagen") %>" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"><%#Eval("Nombre") %></h5>
-                            <p class="card-text">$<%#Eval("Precio") %></p>
+                            <p class="card-text">$<%#Eval("Precio", "{0:F2}") %></p>
                             <a href="Detalles.aspx?id=<%#Eval("Id") %>">Ver detalle</a>
+                            <% if (negocio.Seguridad.sessionActiva(Session["usuario"]))
+                               { %>
                             <asp:Button Text="Agregar Favorito" CssClass="btn btn-primary" runat="server" ID="btnFavorito" CommandArgument='<%#Eval("Id") %>' CommandName="IdArticulo" OnClick="btnFavorito_Click" />
+                            <% } %>
                         </div>
                     </div>
                 </div>

@@ -27,7 +27,8 @@
             </div>
             <div class="mb-3">
                 <label for="txtPrecio" class="form-label">Precio</label>
-                <asp:TextBox ID="txtPrecio" step="0.01" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control"></asp:TextBox>
+                
             </div>
         </div>
         <div class="col-md-4">

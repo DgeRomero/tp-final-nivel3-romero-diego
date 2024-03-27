@@ -15,7 +15,7 @@ namespace catalogo_web
         {
             imgAvatar.ImageUrl = "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png";
 
-            if (!(Page is Login || Page is Default || Page is Registro || Page is Error))
+            if (!(Page is Login || Page is Default || Page is Registro || Page is Error ))
             {
                 if (!Seguridad.sessionActiva(Session["usuario"]))
                 {

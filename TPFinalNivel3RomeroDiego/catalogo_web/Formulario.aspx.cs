@@ -88,7 +88,7 @@ namespace catalogo_web
                 nuevo.Marca = new Marca();
                 nuevo.Marca.Id = int.Parse(ddlMarca.SelectedValue);
                 nuevo.Categoria = new Categoria();
-                nuevo.Categoria.Id = int.Parse(ddlMarca.SelectedValue);
+                nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
 
                 if (Request.QueryString["id"] != null)
                 {
