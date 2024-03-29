@@ -72,7 +72,6 @@
     <Content Include="Error.aspx" />
     <Content Include="Favoritos.aspx" />
     <Content Include="Formulario.aspx" />
-    <Content Include="images\Dulce-Simonna.jpg" />
     <Content Include="Listado.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Perfil.aspx" />
@@ -172,6 +171,9 @@
       <Project>{c017735d-c03f-4f8e-87c9-8f3b57ff257e}</Project>
       <Name>negocio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="images\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
